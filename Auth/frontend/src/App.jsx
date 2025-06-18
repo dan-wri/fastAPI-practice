@@ -26,7 +26,6 @@ const App = () => {
                 </div>
             </AuthProvider>
         </Router>
-        //test
 
     );
 };
