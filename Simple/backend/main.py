@@ -13,11 +13,10 @@ class Fruits(BaseModel):
     fruits: List[Fruit]
 
 
-app = FastAPI(debug=True)
+app = FastAPI()
 
 origins = [
-    "http://localhost:5173",
-    # Add more origins here
+    "http://localhost:5173"
 ]
 
 app.add_middleware(
@@ -30,12 +29,13 @@ app.add_middleware(
 
 memory_db = {"fruits": []}
 
+
 @app.get("/fruits", response_model=Fruits)
 def get_fruits():
     return Fruits(fruits=memory_db["fruits"])
 
 
-@app.post("/fruits")
+@app.post("/fruits", response_model=Fruit)
 def add_fruit(fruit: Fruit):
     memory_db["fruits"].append(fruit)
     return fruit
